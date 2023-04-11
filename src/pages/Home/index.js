@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import api from "../../services/api";
 import { Link } from 'react-router-dom';
 import './home.css'
+import Loading from "../../components/Loading";
 
 export default function Home() {
   const [movies, setMovies] = useState([]);
@@ -43,6 +44,7 @@ export default function Home() {
             </article>
           ))}
       </div>
+      {loading && <Loading/>}
     </div>
   );
 }
