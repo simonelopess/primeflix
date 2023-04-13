@@ -1,5 +1,3 @@
-# Project made in React to learn about SPAs;
-
 ## About the project: 
     Look the news movies the are in the cinema and save them to see later.
 
