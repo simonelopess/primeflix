@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import Loading from "../../components/Loading";
+import { toast } from "react-toastify";
 
 import "./filme.css";
 
@@ -43,23 +44,24 @@ export default function Filme() {
     };
   }, [id, navigate]);
 
-
   function salvarFilme() {
-    const minhaLista = localStorage.getItem('@primeFlix');
+    const minhaLista = localStorage.getItem("@primeFlix");
 
     let filmesSalvos = JSON.parse(minhaLista) || [];
 
-    const hasFilme = filmesSalvos.some((filmesSalvo) => filmesSalvo.id === movie.id )
+    const hasFilme = filmesSalvos.some(
+      (filmesSalvo) => filmesSalvo.id === movie.id
+    );
 
     if (hasFilme) {
-      alert('Esse filme já existe');
+      toast.warn("Esse filme já existe");
       return;
     }
 
     filmesSalvos.push(movie);
-    localStorage.setItem('@primeFlix', JSON.stringify(filmesSalvos));
-    alert('Filme salvo com sucesso');
-  };
+    localStorage.setItem("@primeFlix", JSON.stringify(filmesSalvos));
+    toast.success("Filme salvo com sucesso");
+  }
 
   return (
     <div className="filme-info">
