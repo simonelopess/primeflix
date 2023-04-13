@@ -43,6 +43,24 @@ export default function Filme() {
     };
   }, [id, navigate]);
 
+
+  function salvarFilme() {
+    const minhaLista = localStorage.getItem('@primeFlix');
+
+    let filmesSalvos = JSON.parse(minhaLista) || [];
+
+    const hasFilme = filmesSalvos.some((filmesSalvo) => filmesSalvo.id === movie.id )
+
+    if (hasFilme) {
+      alert('Esse filme já existe');
+      return;
+    }
+
+    filmesSalvos.push(movie);
+    localStorage.setItem('@primeFlix', JSON.stringify(filmesSalvos));
+    alert('Filme salvo com sucesso');
+  };
+
   return (
     <div className="filme-info">
       <h1>{movie.original_title}</h1>
@@ -54,11 +72,11 @@ export default function Filme() {
       <span>{movie.overview}</span>
       <strong>Avaliação: {movie.vote_average} /10</strong>
       <div className="area-buttons">
-        <button>Salvar</button>
+        <button onClick={salvarFilme}>Salvar</button>
         <button>
           <a
             href={`https://youtube.com/results?search_query=${movie.title} trailler`}
-            target="_blank"
+            target="blank"
             rel="external noreferrer"
           >
             Trailer
